@@ -20,4 +20,4 @@ while ipc == 3 and 0 <= int(ip[0]) <= 255 and 0 <= int(ip[1]) <= 255 and 0 <= in
         print('unused')
         break
 else:
-    ip = input('Введен неправильный айпи!!, try again' + '\n' + 'ip: ')
+    ip = input('плохо айпи пишешь, ещё пробуй' + '\n' + 'ip: ')
