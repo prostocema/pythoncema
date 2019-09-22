@@ -1,7 +1,3 @@
-enter = input('Введите имя устройства: ')
-enterp = input('Введите имя параметра: ')
-
-
 london_co = {
     'r1': {
         'location': '21 New Globe Walk',
@@ -28,4 +24,7 @@ london_co = {
     }
 }
 
-print(london_co[enter][enterp])
+enter = input('Введите имя устройства: ')
+keys = ','.join(list(london_co[enter].keys()))
+enterp = input('Введите имя параметра:' + '(' + keys + ')' + ' ')
+print(london_co[enter].get( enterp, 'Такого параметра нет'))

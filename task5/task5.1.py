@@ -1,5 +1,4 @@
 enter = input('Введите имя устройства: ')
-enterp = input('Введите имя параметра: ')
 
 
 london_co = {
@@ -28,4 +27,4 @@ london_co = {
     }
 }
 
-print(london_co[enter][enterp])
+print(london_co[enter])
