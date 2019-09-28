@@ -227,4 +227,38 @@
 
 # bigcema = get_int_vlan_map(file)
 # print(bigcema)
-    
+
+#TASK 9.4
+
+file = '/home/prostocema/Desktop/python/task9/config_sw11.txt'
+
+def convert_config_to_dict(config_filename):
+
+    ignore = ['duplex', 'alias', 'Current configuration']
+    buff = ''
+    value = ''
+    confdict = {}
+    spisok = []
+    with open(config_filename, 'r') as f:
+
+        for line in f:
+            if not (line.startswith('!')) and not any(string in line for string in ignore):
+                buff += line
+        buff = buff[15:]
+        for buffer in buff:
+            if buff.startswith(' ') == False:
+                key = buff[:buff.find('\n')]
+                confdict.update({key:spisok})
+                tkey = key                
+                buff = buff[buff.find('\n') + 1:]
+                value = ''
+            if buff.startswith(' ') == True:
+                if tkey == key:
+                    tvalue = buff[:buff.find('\n')]
+                    value += tvalue + ','
+                    confdict.update({key:value})
+                    buff = buff[buff.find('\n') + 1:]
+    return(confdict)
+
+bigcema = convert_config_to_dict(file)
+print(bigcema)
