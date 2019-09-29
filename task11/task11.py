@@ -31,10 +31,16 @@ def parse_cdp_neighbors(command_output):
             alllist[-2] = alllist[-2] + alllist[-1]
             alllist.pop(-1)
 
-            connectdict.update({name + ', ' + str(alllist[1]):str(alllist[0]) + ', ' + str(alllist[-1])})
+            key = tuple((name + ' ' + alllist[1]).split())
+            # key = tuple(key)
+            value = tuple((alllist[0] + ' ' + alllist[-1]).split())
+            # value = tuple(value)
+
+            connectdict.update({key:value})
+            # timetuple = tuple(connectdict)
             alllist = []
 
     return connectdict
 
-bigcema = parse_cdp_neighbors(buff)
-print(bigcema)
+parse_cdp_neighbors(buff)
+# print(bigcema)

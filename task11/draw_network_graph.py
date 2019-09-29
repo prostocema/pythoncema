@@ -71,8 +71,7 @@ def draw_topology(topology_dict, output_filename='img/topology'):
         t_label = key
         tail = value
         h_label = value
-        g1.edge(
-            head, tail, headlabel=h_label, taillabel=t_label, label=" " * 12)
+        g1.edge(head, tail, headlabel=h_label, taillabel=t_label, label=" " * 12)
 
     g1 = apply_styles(g1, styles)
     filename = g1.render(filename=output_filename)

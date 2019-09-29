@@ -1,4 +1,5 @@
-import draw_network_graph
+from draw_network_graph import draw_topology
+from task11 import parse_cdp_neighbors
 
 filelist = ['sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt']
 
@@ -10,38 +11,11 @@ def create_network_map(list_files):
             buff = ''
             for line in f:
                 buff += line
-
-        alllist = ''
-        name = buff[:buff.find('>')].strip()
-        buff = buff[buff.find('Device'):]
-        headlist = buff[:buff.find('\n')].split()
-        buff = buff[buff.find('\n') +1:]
-
-        headlist[0] = headlist[0] + ' ' + headlist[1]
-        headlist.pop(1)
-        headlist[1] = headlist[1] + ' ' + headlist[2]
-        headlist.pop(2)
-        headlist[-2] = headlist[-2] + ' ' + headlist[-1]
-        headlist.pop(-1)
-
-        for el in headlist:
-            alllist = buff[:buff.find('\n')].split()
-            buff = buff[buff.find('\n') + 1:]
-            if alllist != []:
-                alllist[1] = alllist[1] + alllist[2]
-                alllist.pop(2)
-                alllist[3] = alllist[3] + alllist[4] + alllist[5]
-                alllist.pop(4)
-                alllist.pop(4)
-                alllist[-2] = alllist[-2] + alllist[-1]
-                alllist.pop(-1)
-
-                connectdict.update({name + ', ' + str(alllist[1]):str(alllist[0]) + ', ' + str(alllist[-1])})
-                alllist = []
-
+            test = parse_cdp_neighbors(buff)
+            connectdict.update(test)
     return connectdict
 
 bigcema = create_network_map(filelist)
 print(bigcema)
 
-draw_network_graph.draw_topology(bigcema, 'topology')
+draw_topology(bigcema, output_filename= 'topology')
